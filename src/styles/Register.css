@@ -1,0 +1,125 @@
+/* CSS untuk style formulir pendaftaran */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.register-container {
+    background-image: url('../assets/img/bg4.jpg');
+    background-position: center;
+    min-height: 100vh; /* Ensure the container covers the entire viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+.heading-register {
+    font-size: 36px;
+    text-align: center;
+    margin-top: 30px;
+    color: #333;
+}
+
+.row-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.image-register img {
+    max-width: 100%;
+}
+
+.registration-form {
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.499);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group-register {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select {
+    width: 97%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-group-register .radio input[type="radio"], .form-group-register .radio label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.btn-register {
+    background-color: #ebf0f4;
+    color: #121111;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-register:hover {
+    background-color: #00a7b3;
+} 
+
+/* responsive css */
+@media screen and (max-width: 768px) {
+    .row-register {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .image-register img {
+        flex: 100%;
+        max-width: 80%; 
+        top: 0px;
+        left: 50px;
+        z-index: 12;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        display: block;
+        transform: translateY(-20px);
+    }
+
+    .registration-form {
+        flex: 100%;
+        width: 80%;
+        position: relative;
+        z-index: 1;
+        transform: translateY(-50px);
+        margin-bottom: 40px;
+    }
+
+    .heading-register {
+       margin-top: 80px;
+       font-size: 50px;
+    }
+}
+
+/* Background hanya diterapkan pada komponen register
+body {
+    background-color: #f4f4f4;
+    background: url(../assets/bg\ 4.jpg);
+} */

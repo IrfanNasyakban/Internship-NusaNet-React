@@ -1,0 +1,32 @@
+/* --------------TABLE ONE ATTRIBUTES-----------------  */
+
+table.one {
+    margin: 0 auto; /* Membuat tabel berada di tengah */
+    margin-top: 3em;
+    border-collapse: collapse;
+  }
+
+table.one td {
+  text-align: center;
+  width: 10em;
+  padding: 1em;
+}
+
+table.one th {
+  text-align: center;
+  padding: 1em;
+  background-color: #6491ec;
+  color: white;
+}
+
+table.one tr {
+  height: 1em;
+}
+
+table.one tr:nth-child(even) {
+  background-color: #eee;
+}
+
+table.one tr:nth-child(odd) {
+  background-color: #fff;
+}
