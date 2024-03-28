@@ -8,7 +8,7 @@ table.one {
 
 table.one td {
   text-align: center;
-  width: 10em;
+  width: 10.5em;
   padding: 1em;
 }
 
@@ -29,4 +29,71 @@ table.one tr:nth-child(even) {
 
 table.one tr:nth-child(odd) {
   background-color: #fff;
+}
+
+/* Tombol */
+.button-hapus {
+  display: inline-block;
+  padding: 0.5em 1em;
+  margin: 0.3em 0.2em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #eb6969;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Hover efek */
+.button-hapus:hover {
+  background-color: #c43c3c;
+  border-color: #f81f1f;
+  color: #ffffff;
+}
+
+.button-accept {
+  font-size: 11px;
+  display: inline-block;
+  padding: 0.5em 1em;
+  margin: 0.3em 0.2em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #69eb94;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Hover efek */
+.button-accept:hover {
+  background-color: #47c43c;
+  border-color: #1ff831;
+  color: #ffffff;
+}
+
+.button-reject {
+  font-size: 11px;
+  display: inline-block;
+  padding: 0.5em 1em;
+  margin: 0.3em 0.2em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #c90707;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Hover efek */
+.button-reject:hover {
+  background-color: #6d0909;
+  border-color: #910a0a;
+  color: #ffffff;
 }

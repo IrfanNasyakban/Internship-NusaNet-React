@@ -1,8 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../styles/Register.css";
+import "../styles/Modal.css";
 import registIcon from "../assets/img/regist icon.png";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
+  const [course, setCourse] = useState("");
+  const [gender, setGender] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
+  const saveMagang = async (e) => {
+    e.preventDefault();
+    console.table("State sebelum dikirim:", {
+      name,
+      email,
+      number,
+      course,
+      gender,
+    });
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("number", number);
+    formData.append("course", course);
+    formData.append("gender", gender);
+
+    console.log(formData);
+
+    const jsonData = {};
+    formData.forEach((value, key) => {
+      jsonData[key] = value;
+    });
+
+    try {
+      await axios.post("http://localhost:5000/magang", jsonData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setShowModal(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    // Navigasi ke halaman "/" setelah menutup modal
+    navigate("/");
+  };
+
   return (
     <div className="register-container">
       <h1 className="heading-register">
@@ -14,7 +67,7 @@ const Register = () => {
           <img src={registIcon} width="800" alt="register-icon" />
         </div>
 
-        <form action="" method="post" className="registration-form">
+        <form onSubmit={saveMagang} className="registration-form">
           <div className="form-group-register">
             <label for="name">Name</label>
             <input
@@ -24,6 +77,8 @@ const Register = () => {
               maxlength="50"
               name="name"
               id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="form-group-register">
@@ -35,6 +90,8 @@ const Register = () => {
               maxlength="50"
               name="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-group-register">
@@ -48,12 +105,20 @@ const Register = () => {
               name="number"
               id="number"
               onkeypress="if(this.value.length == 10) return false;"
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
             />
           </div>
           <div className="form-group-register">
             <label for="courses">Select Course</label>
-            <select name="courses" id="courses" required>
-              <option value="" disabled selected>
+            <select
+              name="course"
+              id="course"
+              required
+              value={course}
+              onChange={(e) => setCourse(e.target.value)}
+            >
+              <option value={null} disabled selected>
                 Select the course --
               </option>
               <option value="digital marketing">Digital Marketing</option>
@@ -65,22 +130,46 @@ const Register = () => {
           <div className="form-group-register">
             <label>Select Gender</label>
             <div className="radio">
-              <input type="radio" name="gender" value="male" id="male" />
-              <label for="male">Male</label>
-              <input type="radio" name="gender" value="female" id="female" />
-              <label for="female">Female</label>
+              <input
+                type="radio"
+                name="gender"
+                value="male"
+                id="male"
+                checked={gender === "male"} // Menandai sebagai terpilih jika gender adalah male
+                onChange={(e) => setGender(e.target.value)}
+              />
+              <label htmlFor="male">Male</label>
+              <input
+                type="radio"
+                name="gender"
+                value="female"
+                id="female"
+                checked={gender === "female"} // Menandai sebagai terpilih jika gender adalah female
+                onChange={(e) => setGender(e.target.value)}
+              />
+              <label htmlFor="female">Female</label>
             </div>
           </div>
           <div className="form-group-register">
-            <input
+            <button
               type="submit"
               value="Send Message"
               className="btn-register"
               name="send"
-            />
+            >Send Message</button>
           </div>
         </form>
       </div>
+      {/* Modal */}
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
+            <p>Message sent successfully! now waiting for next inform will be send to your email</p>
+            <button className="button-ok" onClick={closeModal}>Ok</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

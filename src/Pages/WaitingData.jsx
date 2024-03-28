@@ -1,77 +1,105 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import "../assets/css/style.css";
+import "../styles/Table.css";
 
 const WaitingData = () => {
+  const [magang, setMagang] = useState([]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    getMagang();
+  }, []);
+
+  const getMagang = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/magang?search_query=waiting"
+      );
+      setMagang(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const handleAccept = async (e, idMagang) => {
+    e.preventDefault();
+    console.log("ID:", idMagang);
+    const approve = "Approved";
+    const jsonData = { status: approve };
+    try {
+      await axios.patch(`http://localhost:5000/magang/${idMagang}`, jsonData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleReject = async (e, idMagang) => {
+    e.preventDefault();
+    console.log("ID:", idMagang);
+    const approve = "Rejected";
+    const jsonData = { status: approve };
+    try {
+      await axios.patch(`http://localhost:5000/magang/${idMagang}`, jsonData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const centerStyle = {
+    marginTop: "1em",
+    textAlign: "center", // Menetapkan style untuk membuat teks di tengah
+  };
+
   return (
     <div>
-      <main id="main" class="main">
-        <div class="pagetitle">
-          <h1>Data Tables</h1>
-          <nav>
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                <a href="index.html">Home</a>
-              </li>
-              <li class="breadcrumb-item">Tables</li>
-              <li class="breadcrumb-item active">Data</li>
-            </ol>
-          </nav>
-        </div>
-
-        <section class="section">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Datatables</h5>
-
-                  <table class="table datatable">
-                    <thead>
-                      <tr>
-                        <th>
-                          <b>N</b>ame
-                        </th>
-                        <th>Ext.</th>
-                        <th>City</th>
-                        <th data-type="date" data-format="YYYY/DD/MM">
-                          Start Date
-                        </th>
-                        <th>Completion</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Unity Pugh</td>
-                        <td>9958</td>
-                        <td>Curicó</td>
-                        <td>2005/02/11</td>
-                        <td>37%</td>
-                      </tr>
-                      <tr>
-                        <td>Theodore Duran</td>
-                        <td>8971</td>
-                        <td>Dhanbad</td>
-                        <td>1999/04/07</td>
-                        <td>97%</td>
-                      </tr>
-                      <tr>
-                        <td>Kylie Bishop</td>
-                        <td>3147</td>
-                        <td>Norman</td>
-                        <td>2005/09/08</td>
-                        <td>63%</td>
-                      </tr>
-                      
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+      <h2 style={centerStyle}>WAITING LIST</h2>
+      <table className="one">
+        <tr>
+          <th>NAME</th>
+          <th>EMAIL</th>
+          <th>NUMBER</th>
+          <th>COURSE</th>
+          <th>GENDER</th>
+          <th>STATUS</th>
+          <th>ACTION</th>
+        </tr>
+        {magang.length === 0 ? (
+          <tr>
+            <td colSpan="12" style={{ textAlign: "center" }}>
+              Tidak terdapat data Magang yang tersimpan
+            </td>
+          </tr>
+        ) : (
+          magang.map((magang, index) => (
+            <tr key={magang.idMagang}>
+              <td>{magang.name}</td>
+              <td>{magang.email}</td>
+              <td>{magang.number}</td>
+              <td>{magang.course}</td>
+              <td>{magang.gender}</td>
+              <td>{magang.status}</td>
+              <td>
+                <button className="button-accept" onClick={(e) => handleAccept(e, magang.idMagang)}>Accept</button>
+                <button className="button-reject" onClick={(e) => handleReject(e, magang.idMagang)}>Reject</button>
+              </td>
+            </tr>
+          ))
+        )}
+      </table>
     </div>
-  )
-}
+  );
+};
 
-export default WaitingData
+export default WaitingData;

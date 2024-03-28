@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../assets/css/style.css";
 import "../styles/Dashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,6 +8,17 @@ import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import logoNusaNet from "../assets/img/Logo-Nusanet-Full.png";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const Logout = async () => {
+    try {
+      await axios.delete("http://localhost:5000/logout");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const [isOpen, setIsOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
 
@@ -33,15 +46,18 @@ const Navbar = () => {
 
         <ul className={isOpen ? "navbar open" : "navbar"}>
           <li>
-            <a href="#home">Internship List</a>
+            <a href="/dashboard">Internship List</a>
           </li>
           <li>
-            <a href="#about">Waiting List</a>
+            <a href="/waiting-data">Waiting List</a>
           </li>
           <li>
-            <a href="#testi">Reject List</a>
+            <a href="/accept-list">Accept List</a>
           </li>
-            <a href="#contact" className="btn">Logout</a>
+          <li>
+            <a href="/reject-list">Reject List</a>
+          </li>
+            <a onClick={Logout} className="btn">Logout</a>
         </ul>
 
         <div className="header-icons">
