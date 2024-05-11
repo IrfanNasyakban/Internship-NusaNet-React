@@ -34,6 +34,7 @@ const DashboardAdmin = () => {
           <th>COURSE</th>
           <th>GENDER</th>
           <th>STATUS</th>
+          <th>FILE</th>
         </tr>
         {magang.length === 0 ? (
                 <tr>
@@ -50,6 +51,11 @@ const DashboardAdmin = () => {
           <td>{magang.course}</td>
           <td>{magang.gender}</td>
           <td>{magang.status}</td>
+          <td>
+          <a href={magang.url} target="_blank" rel="noreferrer">
+                  Download
+                </a>
+          </td>
         </tr>
         ))
         )}

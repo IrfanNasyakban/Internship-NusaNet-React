@@ -11,7 +11,9 @@ const Register = () => {
   const [number, setNumber] = useState("");
   const [course, setCourse] = useState("");
   const [gender, setGender] = useState("");
+  const [file, setfile] = useState("");
   const [showModal, setShowModal] = useState(false);
+  
   const navigate = useNavigate();
 
   const saveMagang = async (e) => {
@@ -22,6 +24,7 @@ const Register = () => {
       number,
       course,
       gender,
+      file
     });
 
     const formData = new FormData();
@@ -30,24 +33,25 @@ const Register = () => {
     formData.append("number", number);
     formData.append("course", course);
     formData.append("gender", gender);
+    formData.append("file", file);
 
     console.log(formData);
 
-    const jsonData = {};
-    formData.forEach((value, key) => {
-      jsonData[key] = value;
-    });
-
     try {
-      await axios.post("http://localhost:5000/magang", jsonData, {
+      await axios.post("http://localhost:5000/magang", formData, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       });
       setShowModal(true);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const loadFile = (e) => {
+    const file = e.target.files[0];
+    setfile(file);
   };
 
   const closeModal = () => {
@@ -151,12 +155,18 @@ const Register = () => {
             </div>
           </div>
           <div className="form-group-register">
+            <label for="file">Upload File</label>
+            <input type="file" className="file-input" onChange={loadFile} />
+          </div>
+          <div className="form-group-register">
             <button
               type="submit"
               value="Send Message"
               className="btn-register"
               name="send"
-            >Send Message</button>
+            >
+              Send Message
+            </button>
           </div>
         </form>
       </div>
@@ -164,9 +174,16 @@ const Register = () => {
       {showModal && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
-            <p>Message sent successfully! now waiting for next inform will be send to your email</p>
-            <button className="button-ok" onClick={closeModal}>Ok</button>
+            <span className="close" onClick={closeModal}>
+              &times;
+            </span>
+            <p>
+              Message sent successfully! now waiting for next inform will be
+              send to your email
+            </p>
+            <button className="button-ok" onClick={closeModal}>
+              Ok
+            </button>
           </div>
         </div>
       )}

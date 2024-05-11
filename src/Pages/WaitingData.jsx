@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import "../assets/css/style.css";
 import "../styles/Table.css";
 
 const WaitingData = () => {
   const [magang, setMagang] = useState([]);
-  const { id } = useParams();
 
   useEffect(() => {
     getMagang();
@@ -73,6 +71,7 @@ const WaitingData = () => {
           <th>COURSE</th>
           <th>GENDER</th>
           <th>STATUS</th>
+          <th>FILE</th>
           <th>ACTION</th>
         </tr>
         {magang.length === 0 ? (
@@ -90,6 +89,13 @@ const WaitingData = () => {
               <td>{magang.course}</td>
               <td>{magang.gender}</td>
               <td>{magang.status}</td>
+              <td>
+              <td>
+          <a href={magang.url} target="_blank" rel="noreferrer">
+                  Download
+                </a>
+          </td>
+              </td>
               <td>
                 <button className="button-accept" onClick={(e) => handleAccept(e, magang.idMagang)}>Accept</button>
                 <button className="button-reject" onClick={(e) => handleReject(e, magang.idMagang)}>Reject</button>

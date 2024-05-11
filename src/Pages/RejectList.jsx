@@ -3,7 +3,7 @@ import axios from "axios";
 import "../styles/Table.css";
 
 const RejectList = () => {
-    const [magang, setMagang] = useState([]);
+  const [magang, setMagang] = useState([]);
 
   useEffect(() => {
     getMagang();
@@ -36,6 +36,7 @@ const RejectList = () => {
           <th>COURSE</th>
           <th>GENDER</th>
           <th>STATUS</th>
+          <th>FILE</th>
         </tr>
         {magang.length === 0 ? (
           <tr>
@@ -52,6 +53,11 @@ const RejectList = () => {
               <td>{magang.course}</td>
               <td>{magang.gender}</td>
               <td>{magang.status}</td>
+              <td>
+                <a href={magang.url} target="_blank" rel="noreferrer">
+                  Download
+                </a>
+              </td>
             </tr>
           ))
         )}
