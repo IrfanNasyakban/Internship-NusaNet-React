@@ -1,0 +1,63 @@
+.nilai-container {
+    width: 75%;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .nilai {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .row-nilai {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .nilai-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .form-column {
+    flex: 1;
+    padding: 10px;
+    min-width: 200px;
+  }
+  
+  .form-group-nilai {
+    margin: 20px 20px 20px 20px;
+    
+  }
+  
+  .form-group-nilai label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group-nilai input {
+    padding-right: 10px;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .btn-nilai {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-nilai:hover {
+    background-color: #0056b3;
+  }
+  
+  .full-width {
+    width: 100%;
+  margin-top: 20px;
+  }

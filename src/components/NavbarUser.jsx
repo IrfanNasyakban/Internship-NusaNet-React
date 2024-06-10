@@ -7,8 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import logoNusaNet from "../assets/img/Logo-Nusanet-Full.png";
 
-const Navbar = () => {
-  const navigate = useNavigate();
+const NavbarUser = () => {
+    const navigate = useNavigate();
 
   const Logout = async () => {
     try {
@@ -46,19 +46,10 @@ const Navbar = () => {
 
         <ul className={isOpen ? "navbar open" : "navbar"}>
           <li>
-            <a href="/dashboard">Internship List</a>
+            <a href="/">Homepage</a>
           </li>
           <li>
-            <a href="/nilai">Nilai List</a>
-          </li>
-          <li>
-            <a href="/waiting-data">Waiting List</a>
-          </li>
-          <li>
-            <a href="/accept-list">Accept List</a>
-          </li>
-          <li>
-            <a href="/reject-list">Reject List</a>
+            <a href="/nilai-user">Nilai List</a>
           </li>
             <a onClick={Logout} className="btn">Logout</a>
         </ul>
@@ -70,7 +61,7 @@ const Navbar = () => {
         </div>
       </header>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default NavbarUser

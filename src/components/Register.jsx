@@ -125,10 +125,9 @@ const Register = () => {
               <option value={null} disabled selected>
                 Select the course --
               </option>
-              <option value="digital marketing">Digital Marketing</option>
-              <option value="data analysis">Data Analysis</option>
-              <option value="product management">Project Management</option>
-              <option value="website development">Website Development</option>
+              <option value="Frontend Developer">Frontend Developer</option>
+              <option value="Backend Developer">Backend Developer</option>
+              <option value="Jaringan">Jaringan</option>
             </select>
           </div>
           <div className="form-group-register">

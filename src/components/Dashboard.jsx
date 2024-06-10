@@ -1,4 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { LogOut, reset } from "../features/authSlice";
+import { getMe } from "../features/authSlice";
+import { useNavigate } from "react-router-dom";
 import Swiper from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -25,6 +30,30 @@ import cta6 from "../assets/img/cta6.png";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    const hasReloaded = localStorage.getItem('hasReloaded');
+    if (!hasReloaded) {
+      // If not, set the flag and reload the page
+      localStorage.setItem('hasReloaded', 'true');
+      dispatch(getMe());
+      window.location.reload();
+    } else {
+      // Clear the flag for future visits
+      localStorage.removeItem('hasReloaded');
+    }
+    dispatch(getMe());
+  }, [dispatch]);
+
+  const Logout = () => {
+    dispatch(LogOut());
+    dispatch(reset());
+    navigate("/");
+    window.location.reload();
+  };
 
   const handleMenuClick = () => {
     setIsOpen(!isOpen); // Ubah status menu terbuka atau tidak
@@ -80,7 +109,17 @@ window.addEventListener('scroll', handleScroll);
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#testi">Review</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <a href="/login" className="btn">Login</a>
+                {user ? (
+                  <>
+                    <a onClick={Logout} className="btn" style={{ marginRight: "10px" }}>Logout</a>
+                    <a href='/nilai-user' className="btn">Cek Nilai</a>
+                  </>
+                ) : (
+                  <>
+                    <a href="/login" className="btn" style={{ marginRight: "10px" }}>Login</a>
+                    <a href="/register-user" className="btn">Register</a>
+                 </>
+                )}
             </ul>
 
             <div className="header-icons">
@@ -154,9 +193,11 @@ window.addEventListener('scroll', handleScroll);
           </p>
           <br />
           <br />
-          <a href="/register" class="btn">
-            Register Now
-          </a>
+          {user && (
+            <a href="/register" className="btn">
+              Daftar Magang
+            </a>
+          )}
         </div>
       </section>
 

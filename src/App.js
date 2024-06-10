@@ -7,6 +7,11 @@ import WaitingData from "./Pages/WaitingData";
 import Navbar from "./components/Navbar";
 import AcceptList from "./Pages/AcceptList";
 import RejectList from "./Pages/RejectList";
+import RegisterUser from "./Pages/RegisterUser";
+import InputNilai from "./Pages/InputNilai";
+import NilaiList from "./Pages/NilaiList";
+import NilaiListUser from "./Pages/NilaiListUser";
+import NavbarUser from "./components/NavbarUser";
 
 function App() {
   return (
@@ -20,6 +25,11 @@ function App() {
         <Route path="/register" element={(
           <>
           <Register/>
+          </>
+        )} />
+        <Route path="/register-user" element={(
+          <>
+          <RegisterUser/>
           </>
         )} />
         <Route path="/login" element={(
@@ -37,6 +47,24 @@ function App() {
           <>
           <Navbar/>
           <WaitingData/>
+          </>
+        )} />
+        <Route path="/nilai/:id" element={(
+          <>
+          <Navbar/>
+          <InputNilai/>
+          </>
+        )} />
+        <Route path="/nilai" element={(
+          <>
+          <Navbar/>
+          <NilaiList/>
+          </>
+        )} />
+        <Route path="/nilai-user" element={(
+          <>
+          <NavbarUser/>
+          <NilaiListUser/>
           </>
         )} />
         <Route path="/accept-list" element={(
